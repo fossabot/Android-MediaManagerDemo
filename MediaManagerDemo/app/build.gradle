@@ -83,8 +83,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compileOnly 'com.dji:dji-sdk-provided:4.11'
-    implementation 'com.dji:dji-uxsdk:4.11'
+    compileOnly 'com.dji:dji-sdk-provided:4.13'
+    implementation 'com.dji:dji-uxsdk:4.13'
 
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.core:core:1.0.0'

@@ -13,6 +13,7 @@
 -dontwarn com.mapbox.**
 -dontwarn okhttp3.**
 -dontwarn retrofit2.**
+-ignorewarnings
 
 -keepclassmembers enum * {
     public static <methods>;
