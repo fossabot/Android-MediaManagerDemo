@@ -252,18 +252,33 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 if (null != mMediaManager) {
                     mMediaManager.addUpdateFileListStateListener(this.updateFileListStateListener);
                     mMediaManager.addMediaUpdatedVideoPlaybackStateListener(this.updatedVideoPlaybackStateListener);
-                    DemoApplication.getCameraInstance().setMode(SettingsDefinitions.CameraMode.MEDIA_DOWNLOAD, new CommonCallbacks.CompletionCallback() {
+                    DemoApplication.getCameraInstance().enterPlayback(new CommonCallbacks.CompletionCallback() {
                         @Override
                         public void onResult(DJIError error) {
                             if (error == null) {
-                                DJILog.e(TAG, "Set cameraMode success");
+                                DJILog.e(TAG, "enterPlayback success");
                                 showProgressDialog();
                                 getFileList();
                             } else {
-                                setResultToToast("Set cameraMode failed");
+                                setResultToToast("enterPlayback failed");
                             }
                         }
                     });
+
+//                    DemoApplication.getCameraInstance().setMode(SettingsDefinitions.CameraMode.MEDIA_DOWNLOAD, new CommonCallbacks.CompletionCallback() {
+//                        @Override
+//                        public void onResult(DJIError error) {
+//                            if (error == null) {
+//                                DJILog.e(TAG, "Set cameraMode success");
+//                                showProgressDialog();
+//                                getFileList();
+//                            } else {
+//                                setResultToToast("Set cameraMode failed");
+//                            }
+//                        }
+//                    });
+
+
                     if (mMediaManager.isVideoPlaybackSupported()) {
                         DJILog.e(TAG, "Camera support video playback!");
                     } else {
@@ -564,6 +579,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
             @Override
             public void onRateUpdate(long total, long current, long persize) {
+                setResultToToast("downloadFile onRateUpdate:"+persize+":"+current+"/"+total);
                 int tmpProgress = (int) (1.0 * current / total * 100);
                 if (tmpProgress != currentProgress) {
                     mDownloadDialog.setProgress(tmpProgress);
